@@ -1,0 +1,25 @@
+@layer components {
+
+  #app {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .button {
+    --size: 42px;
+
+    cursor: pointer;
+    block-size: var(--size);
+    min-inline-size: var(--size);
+    border-radius: 4px;
+    border: 1px solid currentColor;
+    background: transparent;
+    color: inherit;
+    font-size: 32px;
+
+    &:hover:not(:disabled) {
+      background-color: #f0db4f2f;
+    }
+  }
+}
