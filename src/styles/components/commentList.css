@@ -1,0 +1,57 @@
+.commentList {
+  --primary: #42b883;
+  --secondary: #1f2925;
+  --accent: #b8c85a;
+  --white: #fffd;
+
+  resize: vertical;
+  padding: 20px;
+  border: 4px solid var(--primary);
+  border-radius: 6px;
+  min-block-size: 180px;
+  block-size: 180px;
+  overflow: auto;
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+
+  &::-webkit-scrollbar {
+    inline-size: 6px;
+    block-size: 8px;
+    background-color: var(--primary);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--white);
+  }
+
+  article {
+    padding: inherit;
+    border: inherit;
+    border-width: 2px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 0px var(--primary), 2px 2px 0px var(--primary);
+    inline-size: 400px;
+
+    h3,
+    p {
+      margin-block: 0;
+    }
+
+    h3 {
+      margin-block-end: 8px;
+      font-size: 18px;
+      color: var(--accent);
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+  }
+
+  .spinner {
+    translate: 0 25px;
+  }
+}

@@ -1,0 +1,35 @@
+.quoteArticle {
+  --primary-100: #41b883;
+  --primary-200: #72837b;
+  --secondary: #f0db4f;
+
+  inline-size: 320px;
+  border: 2px solid var(--primary-100);
+  border-radius: 8px;
+  padding: 20px;
+  color: var(--primary-100);
+  text-align: right;
+
+  h2,
+  p {
+    text-align: left;
+  }
+
+  h2 {
+    margin-block-start: 0;
+    font-size: 14px;
+    color: var(--secondary);
+  }
+
+  p {
+    margin-block: 16px 8px;
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+
+  span {
+    color: var(--primary-200);
+    font-size: 14px;
+  }
+}

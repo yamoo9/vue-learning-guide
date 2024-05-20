@@ -1,0 +1,28 @@
+.quoteForm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  border-block-end: 0.5px solid #6b6d6e6e;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 12px;
+
+  label {
+    line-height: 1;
+    translate: 0 1px;
+    font-size: 20px;
+  }
+
+  input {
+    inline-size: 2em;
+    border: 0;
+    border-radius: 4px;
+    padding: 4px 0 4px 8px;
+    background: #0a0e13;
+    color: #ffcc00;
+    font-size: 20px;
+  }
+}
