@@ -1,0 +1,106 @@
+@layer components {
+
+  #app {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .button {
+    --size: 42px;
+
+    cursor: pointer;
+    block-size: var(--size);
+    min-inline-size: var(--size);
+    margin-block-end: 20px;
+    border-radius: 4px;
+    border: 1px solid currentColor;
+    background: transparent;
+    color: inherit;
+    font-size: 32px;
+
+    &:hover:not(:disabled) {
+      background-color: #41b8832f;
+    }
+  }
+
+  .subjectList {
+    list-style: none;
+    padding-left: 0;
+    margin-block: 0;
+
+    li {
+      margin-block: 8px;
+
+      &::before {
+        --size: 12px;
+
+        content: '';
+        display: inline-block;
+        block-size: var(--size);
+        inline-size: var(--size);
+        margin-inline-end: 8px;
+        background: url("../assets/vue.svg") no-repeat center / cover;
+      }
+    }
+  }
+
+  .table {
+    --color: 66, 184, 131;
+
+    margin-block: 20px;
+    border-collapse: collapse;
+    border: 2px solid rgb(var(--color));
+
+    th,
+    td {
+      padding: 8px 12px;
+      border-bottom: 0.5px solid rgb(var(--color));
+      border-right: 0.5px solid rgb(var(--color));
+
+      &[role="button"] {
+        cursor: pointer;
+        background: rgba(var(--color), 0.05);
+
+        &:hover {
+          background: rgba(var(--color), 0.1);
+        }
+      }
+    }
+
+    a {
+      color: rgba(var(--color), 0.6);
+      text-decoration: none;
+
+      &:hover {
+        color: rgba(var(--color), 1);
+      }
+    }
+  }
+
+  .sr-only {
+    overflow: hidden;
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: circle(0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    white-space: nowrap;
+  }
+
+  caption.sr-only {
+    position: static;
+  }
+
+  .sr-only.focusable:focus {
+    visibility: initial;
+    position: static;
+    clip: auto;
+    clip-path: unset;
+    width: initial;
+    height: initial;
+    margin: initial;
+    white-space: initial;
+  }
+}
