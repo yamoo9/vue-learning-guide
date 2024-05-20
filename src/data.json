@@ -1,0 +1,17 @@
+{
+  "headline": "JavaScript 애플리케이션",
+  "description": "JavaScript 프로그래밍으로 웹 애플리케이션을 만듭니다.",
+  "count": 0,
+  "logos": {
+    "js": {
+      "src": "https://cdn.worldvectorlogo.com/logos/logo-javascript.svg",
+      "label": "JavaScript 로고",
+      "size": 32
+    },
+    "vue": {
+      "src": "https://cdn.worldvectorlogo.com/logos/vue-9.svg",
+      "label": "Vue.js 로고",
+      "size": 32
+    }
+  }
+}
