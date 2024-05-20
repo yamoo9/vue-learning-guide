@@ -1,0 +1,20 @@
+.subjectList {
+  list-style: none;
+  padding-left: 0;
+  margin-block: 0;
+
+  li {
+    margin-block: 8px;
+
+    &::before {
+      --size: 12px;
+
+      content: '';
+      display: inline-block;
+      block-size: var(--size);
+      inline-size: var(--size);
+      margin-inline-end: 8px;
+      background: url("../assets/vue.svg") no-repeat center / cover;
+    }
+  }
+}
