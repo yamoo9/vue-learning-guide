@@ -1,0 +1,32 @@
+.table {
+  --color: 66, 184, 131;
+
+  margin-block: 20px;
+  border-collapse: collapse;
+  border: 2px solid rgb(var(--color));
+
+  th,
+  td {
+    padding: 8px 12px;
+    border-bottom: 0.5px solid rgb(var(--color));
+    border-right: 0.5px solid rgb(var(--color));
+
+    &[role="button"] {
+      cursor: pointer;
+      background: rgba(var(--color), 0.05);
+
+      &:hover {
+        background: rgba(var(--color), 0.1);
+      }
+    }
+  }
+
+  a {
+    color: rgba(var(--color), 0.6);
+    text-decoration: none;
+
+    &:hover {
+      color: rgba(var(--color), 1);
+    }
+  }
+}

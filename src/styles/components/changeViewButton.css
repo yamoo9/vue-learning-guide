@@ -1,0 +1,23 @@
+.changeViewButton {
+  --primary: #42b883;
+
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  padding: 8px;
+  background-color: transparent;
+  color: var(--primary);
+  opacity: 0.7;
+
+  svg {
+    inline-size: 24px;
+    block-size: 24px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
