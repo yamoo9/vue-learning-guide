@@ -1,6 +1,8 @@
 .emailTable {
   --primary: #41b875;
   --primary-50: #41b86db0;
+  --primary-100: #41b87526;
+  --primary-200: #41b87567;
 
   border-collapse: collapse;
   border: 2px solid var(--primary);
@@ -14,6 +16,14 @@
     border-block-end: 0.5px solid currentColor;
   }
 
+  .checked {
+    background: var(--primary-100);
+  }
+
+  .allChecked {
+    background: var(--primary-200);
+  }
+
   th {
     background: var(--primary);
     color: #111;
@@ -23,7 +33,11 @@
     cursor: pointer;
     border: 0;
     background: transparent;
-    color: var(--primary);
+    color: var(--primary-50);
+
+    &.read {
+      color: var(--primary);
+    }
   }
 
   input {

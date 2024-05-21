@@ -22,9 +22,9 @@ const vueApp = createApp({
     const reverseSortedMails = computed(() => mails.toReversed());
 
     const allChecked = ref(false);
-    watch(allChecked, (newValue) => {
-      mails.forEach((mail) => (mail.checked = newValue));
-    });
+    const handleAllChecked = (e) => {
+      mails.forEach((mail) => (mail.checked = e.target.checked));
+    };
 
     const totalCheckedCount = computed(() =>
       mails.reduce((total, mail) => total + (mail.checked ? 1 : 0), 0)
@@ -47,6 +47,7 @@ const vueApp = createApp({
       allChecked,
       totalCheckedCount,
       totalReadCount,
+      handleAllChecked,
     };
   },
 
@@ -55,7 +56,13 @@ const vueApp = createApp({
       <caption class="sr-only">이메일 앱 테이블</caption>
       <thead>
         <th scope="col">
-          <input type="checkbox" id="allSelect" title="모두 선택" v-model="allChecked" />
+          <input
+            type="checkbox"
+            id="allSelect"
+            title="모두 선택"
+            v-model="allChecked" 
+            @input="handleAllChecked" 
+          />
           <label for="allSelect" class="sr-only">모두 선택</label>
         </th>
         <th scope="col">읽음</th>
@@ -63,7 +70,10 @@ const vueApp = createApp({
         <th scope="col">날짜</th>
       </thead>
       <tbody>
-        <tr v-for="mail in reverseSortedMails" :key="mail.id">
+        <tr
+          v-for="mail in reverseSortedMails" 
+          :key="mail.id" 
+        >
           <td>
             <input 
               type="checkbox"
