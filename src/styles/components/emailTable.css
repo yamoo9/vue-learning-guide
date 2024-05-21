@@ -1,0 +1,49 @@
+.emailTable {
+  --primary: #41b875;
+  --primary-50: #41b86db0;
+
+  border-collapse: collapse;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  letter-spacing: 0.05em;
+
+  th,
+  td {
+    padding: 6px 24px;
+    border-inline-end: 0.5px solid currentColor;
+    border-block-end: 0.5px solid currentColor;
+  }
+
+  th {
+    background: var(--primary);
+    color: #111;
+  }
+
+  button {
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    color: var(--primary);
+  }
+
+  input {
+    accent-color: var(--primary);
+  }
+
+  a {
+    color: var(--primary-50);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+
+  tfoot {
+    td {
+      border-block-start: 1.5px solid var(--primary);
+      padding: 12px 24px;
+      font-size: 13px;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "OOO 교육 문의드립니다.",
+    "sender": "OOO",
+    "sendDate": "05.04 09:21",
+    "read": false,
+    "checked": false
+  },
+  {
+    "id": 2,
+    "title": "OO에서 결재하신 내역입니다.",
+    "sender": "OO",
+    "sendDate": "05.012 14:37",
+    "read": true,
+    "checked": false
+  }
+]
