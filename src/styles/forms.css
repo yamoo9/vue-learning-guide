@@ -1,0 +1,96 @@
+.form {
+  display: flex;
+  flex-flow: column;
+  gap: 24px;
+  min-inline-size: 400px;
+}
+
+.formControl {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
+
+  label {
+    user-select: none;
+    font-size: 12px;
+  }
+
+  input {
+    inline-size: calc(100% - 0.8em);
+    padding: 0.4em;
+    background: transparent;
+    border: 0;
+    border-bottom: 0.5px solid #41b88366;
+    color: #41b883;
+
+    &:focus {
+      outline: none;
+      border-color: #41b883;
+    }
+
+    &::placeholder {
+      color: #41b88377;
+    }
+  }
+}
+
+.togglePasswordButton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  border: 0;
+  block-size: 32px;
+  inline-size: 32px;
+  color: #41b88399;
+
+  &:hover {
+    cursor: pointer;
+    color: #41b883;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    color: #41b883;
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 8px;
+
+  button {
+    cursor: pointer;
+    flex: 1;
+    border: 0;
+    border-radius: 2px;
+    padding: 0.6em;
+    background: #41b883bb;
+    color: #fff;
+
+    &:hover:not(:disabled, [aria-disabled="true"]) {
+      background: #41b883;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+}
+
+.pre {
+  inline-size: 100%;
+  margin-block-start: 40px;
+  border-block: 0.5px solid #41b88388;
+  padding: 24px 20px;
+  background: #fff1;
+  line-height: 1.5;
+  letter-spacing: 0.07em;
+}
