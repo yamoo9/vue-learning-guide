@@ -1,23 +1,15 @@
 <script setup lang="ts">
-import { ref, Ref, provide, readonly } from 'vue';
-import { isShowChildrenSymbol } from './symbolKeys';
+import { Ref, provide } from 'vue';
 import Parent from './Parent.vue';
-
-const isShowChildren = ref<boolean>(true);
-
-const handleToggleIsShow = () => {
-  isShowChildren.value = !isShowChildren.value;
-};
+import { isShowChildrenSymbol } from './symbolKeys';
+import useIsShow from '@/composables/useIsShow';
 
 export interface IIsShowChildren {
   isShow: Readonly<Ref<boolean>>;
   toggle: () => void;
 }
 
-provide<IIsShowChildren>(isShowChildrenSymbol, {
-  isShow: readonly(isShowChildren),
-  toggle: handleToggleIsShow,
-});
+provide<IIsShowChildren>(isShowChildrenSymbol, useIsShow(false));
 </script>
 
 <template>
