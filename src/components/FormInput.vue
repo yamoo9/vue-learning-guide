@@ -33,12 +33,18 @@ const computedType = computed(() => {
     return type;
   }
 });
+
+const inputRef = ref<HTMLInputElement | null>(null);
+
+defineExpose({
+  input: inputRef,
+});
 </script>
 
 <template>
   <div class="formControl">
     <label :for="id">{{ label }}</label>
-    <input :type="computedType" :id="id" v-model="model" v-bind="attrs" />
+    <input ref="inputRef" :type="computedType" :id="id" v-model="model" v-bind="attrs" />
     <TogglePasswordButton v-if="isPasswordType" :isShow="isShow" @toggle="handleToggleIsShow" />
   </div>
 </template>
