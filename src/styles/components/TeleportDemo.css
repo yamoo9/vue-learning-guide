@@ -1,0 +1,37 @@
+#teleportDemo {
+  .list {
+    list-style: none;
+    padding-inline-start: 0;
+    margin-block: 0;
+
+    li {
+      padding-block: 12px;
+      font-size: 19px;
+      line-height: 1.7;
+      color: #133a29;
+    }
+  }
+
+  code {
+    display: inline-block;
+    border-radius: 2px;
+    padding: 4px;
+    line-height: 1;
+    background: #35986b;
+  }
+
+  a {
+    line-height: 1;
+    border-radius: 4px;
+    padding: 2px 4px;
+    vertical-align: 1px;
+    color: #fbc02d;
+    background: #10171e;
+    text-decoration: none;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
