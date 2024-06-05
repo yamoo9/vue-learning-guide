@@ -1,0 +1,41 @@
+::selection {
+  background: #ffe347;
+  color: #10171e;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+
+  margin: 40px;
+  min-height: calc(100vh - 80px);
+  background: #10171e;
+  color: #41b883;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  line-height: 1;
+  margin-block: 8px;
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+img {
+  vertical-align: -4px;
+}
+
+p {
+  margin-block: 8px 24px;
+}
+
+abbr[title] {
+  cursor: help;
+  text-decoration: none;
+}
