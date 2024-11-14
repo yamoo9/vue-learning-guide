@@ -11,6 +11,7 @@ import './styles/globals.css';
 const vueApp = createApp({
   setup() {
     const quoteId = ref(1);
+    
     const state = reactive({
       isLoading: false,
       data: null,
@@ -36,6 +37,7 @@ const vueApp = createApp({
     });
 
     return {
+      quoteId,
       state,
       spinner,
     };
