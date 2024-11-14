@@ -55,19 +55,21 @@ const vueApp = createApp({
     <table class="emailTable">
       <caption class="sr-only">이메일 앱 테이블</caption>
       <thead>
-        <th scope="col">
-          <input
-            type="checkbox"
-            id="allSelect"
-            title="모두 선택"
-            v-model="allChecked" 
-            @input="handleAllChecked" 
-          />
-          <label for="allSelect" class="sr-only">모두 선택</label>
-        </th>
-        <th scope="col">읽음</th>
-        <th scope="col">제목</th>
-        <th scope="col">날짜</th>
+        <tr>
+          <th scope="col">
+            <input
+              type="checkbox"
+              id="allSelect"
+              title="모두 선택"
+              v-model="allChecked" 
+              @input="handleAllChecked" 
+            />
+            <label for="allSelect" class="sr-only">모두 선택</label>
+          </th>
+          <th scope="col">읽음</th>
+          <th scope="col">제목</th>
+          <th scope="col">날짜</th>
+        </tr>
       </thead>
       <tbody>
         <tr
@@ -106,9 +108,11 @@ const vueApp = createApp({
         </tr>
       </tbody>
       <tfoot>
-        <td colspan="4">
-          선택된 메일의 총 갯수는 <b>{{totalCheckedCount}}</b>개, 읽은 메일의 총 갯수는 <b>{{totalReadCount}}</b>개입니다.
-        </td>
+        <tr>
+          <td colspan="4">
+            선택된 메일의 총 갯수는 <b>{{totalCheckedCount}}</b>개, 읽은 메일의 총 갯수는 <b>{{totalReadCount}}</b>개입니다.
+          </td>
+        </tr>
       </tfoot>
     </table>
   `,
