@@ -9,7 +9,6 @@
 
     for (let i = stringNum.length - 1, stringN; (stringN = stringNum[i]); --i) {
       let separator = '';
-      const stringN = stringNum[i];
       if (i > 0 && (i + 1) % 3 === 0) separator = ',';
       currency = currency + stringN + separator;
     }
