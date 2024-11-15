@@ -7,7 +7,7 @@
     let currency = '';
     const stringNum = num.toString();
 
-    for (let i = 0; i < stringNum.length; ++i) {
+    for (let i = stringNum.length - 1, stringN; (stringN = stringNum[i]); --i) {
       let separator = '';
       const stringN = stringNum[i];
       if (i > 0 && (i + 1) % 3 === 0) separator = ',';
