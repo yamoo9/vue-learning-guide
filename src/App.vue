@@ -2,8 +2,8 @@
 import { computed, ref } from 'vue';
 import Navigation from '@/components/AppNavigation.vue';
 import ComponentFundamentals from '@/views/ComponentFundamentals.vue';
-import RegisterForm from '@/views/RegisterForm.vue';
 import PropsDrilling from '@/views/PropsDrillingDemo/PropsDrilling.vue';
+import RegisterForm from '@/views/RegisterForm.vue';
 
 const navigationList = ref<INavigationItem[]>([
   {

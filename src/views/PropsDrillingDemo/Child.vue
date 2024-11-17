@@ -1,29 +1,18 @@
 <script setup lang="ts">
-import { toRefs } from 'vue';
 import WrapperBox from '@/components/WrapperBox.vue';
 import GrandChild from './GrandChild.vue';
 
-interface Props {
-  isShow?: boolean;
-}
+// 상위 컴포넌트에서 전달된 props 정의
 
-const props = withDefaults(defineProps<Props>(), { isShow: false });
-const { isShow } = toRefs(props);
+// 상위 컴포넌트에서 전달된 커스텀 이벤트 정의
 
-interface Emits {
-  (e: 'toggle'): void;
-}
-
-const emit = defineEmits<Emits>();
 </script>
 
 <template>
   <WrapperBox title="Child" color="#375fff">
-    <button type="button" class="toggleButton" @click="emit('toggle')">
-      {{ isShow ? 'Hide' : 'Show' }} Grand Child
-    </button>
-    <GrandChild :isShow="isShow" />
-    <GrandChild :isShow="isShow" />
+    <button type="button" class="toggleButton">Hide Grand Children</button>
+    <GrandChild />
+    <GrandChild />
   </WrapperBox>
 </template>
 

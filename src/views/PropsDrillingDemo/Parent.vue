@@ -1,24 +1,15 @@
 <script setup lang="ts">
 import WrapperBox from '@/components/WrapperBox.vue';
 import Child from './Child.vue';
-import { toRefs } from 'vue';
 
-interface Props {
-  isShow?: boolean;
-}
+// 상위 컴포넌트에서 전달된 props 정의
 
-const props = withDefaults(defineProps<Props>(), { isShow: false });
-const { isShow } = toRefs(props);
+// 상위 컴포넌트에서 전달된 커스텀 이벤트 정의
 
-interface Emits {
-  (e: 'toggle'): void;
-}
-
-const emit = defineEmits<Emits>();
 </script>
 
 <template>
   <WrapperBox title="Parent">
-    <Child :isShow="isShow" @toggle="emit('toggle')" />
+    <Child />
   </WrapperBox>
 </template>
