@@ -1,1 +1,9 @@
 # Vue.js 펀더멘탈
+
+학습 자료를 로컬 드라이브로 복사하려면 아래 명령을 터미널에서 실행하세요.
+
+## 22. 플러그인
+
+```sh
+npx degit yamoo9/vue-learning-guide#L22-begin 22-custom-plugin
+```
