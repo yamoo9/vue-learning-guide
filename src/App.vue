@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 import Navigation from '@/components/AppNavigation.vue';
 import ComponentFundamentals from '@/views/ComponentFundamentals.vue';
 import RegisterForm from '@/views/RegisterForm.vue';
-import PropsDrilling from '@/views/PropsDrilling/PropsDrilling.vue';
+import ProvideInject from '@/views/ProvideInject/ProvideInject.vue';
 
 const navigationList = ref<INavigationItem[]>([
   {
@@ -18,18 +18,21 @@ const navigationList = ref<INavigationItem[]>([
   },
   {
     id: 3,
-    href: '/props-drilling',
-    viewMode: 'props drilling',
+    href: '/provide-inject',
+    viewMode: 'provide inject',
   },
 ]);
 
-const renderView = ref<RenderView>('props drilling');
+const renderView = ref<RenderView>('provide inject');
 
 const changeRenderView = (viewMode: RenderView) => {
   renderView.value = viewMode;
 };
 
-const handleChangeRenderView = (viewMode: RenderView, payload?: FormPayload) => {
+const handleChangeRenderView = (
+  viewMode: RenderView,
+  payload?: FormPayload
+) => {
   changeRenderView(viewMode === 'submitted' ? 'home' : viewMode);
   if (payload) alert(JSON.stringify(payload, null, 2));
 };
@@ -47,9 +50,9 @@ const render = computed(() => {
         component: RegisterForm,
         eventHandlers: { changeRenderView: handleChangeRenderView },
       };
-    case 'props drilling':
+    case 'provide inject':
       return {
-        component: PropsDrilling,
+        component: ProvideInject,
         eventHandlers: {},
       };
   }

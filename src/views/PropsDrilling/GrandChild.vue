@@ -1,12 +1,19 @@
 <script setup lang="ts">
-import { inject } from 'vue';
+import { toRefs } from 'vue';
 import WrapperBox from '@/components/WrapperBox.vue';
-import type { IIsShowChildren } from './PropsDrilling.vue';
-import { isShowChildrenSymbol } from './symbolKeys';
 
-const { isShow } = inject(isShowChildrenSymbol) as IIsShowChildren;
+interface Props {
+  isShow?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), { isShow: false });
+const { isShow } = toRefs(props);
 </script>
 
 <template>
-  <WrapperBox title="Grand Child" color="#705af9" :style="`opacity: ${isShow ? 1 : 0}`" />
+  <WrapperBox
+    title="Grand Child"
+    color="#705af9"
+    :style="`opacity: ${isShow ? 1 : 0}`"
+  ></WrapperBox>
 </template>

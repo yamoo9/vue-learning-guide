@@ -1,29 +1,19 @@
 <script setup lang="ts">
-import { toRefs } from 'vue';
+import { inject } from 'vue';
+import { toggleChildrenKey, ToggleChildrenValue } from './injectionKey';
 import WrapperBox from '@/components/WrapperBox.vue';
 import GrandChild from './GrandChild.vue';
 
-interface Props {
-  isShow?: boolean;
-}
-
-const props = withDefaults(defineProps<Props>(), { isShow: false });
-const { isShow } = toRefs(props);
-
-interface Emits {
-  (e: 'toggle'): void;
-}
-
-const emit = defineEmits<Emits>();
+const { isShow, toggle } = inject(toggleChildrenKey) as ToggleChildrenValue;
 </script>
 
 <template>
   <WrapperBox title="Child" color="#375fff">
-    <button type="button" class="toggleButton" @click="emit('toggle')">
+    <button type="button" class="toggleButton" @click="toggle">
       {{ isShow ? 'Hide' : 'Show' }} Grand Child
     </button>
-    <GrandChild :isShow="isShow" />
-    <GrandChild :isShow="isShow" />
+    <GrandChild />
+    <GrandChild />
   </WrapperBox>
 </template>
 
