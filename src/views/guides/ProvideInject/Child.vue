@@ -1,16 +1,17 @@
 <script setup lang="ts">
+import { inject } from 'vue';
 import WrapperBox from '@/components/WrapperBox.vue';
 import GrandChild from './GrandChild.vue';
+import { toggleChildrenKey, type ToggleChildrenValue } from './injectionKeys';
 
-// 상위 컴포넌트에서 전달된 props 정의
-
-// 상위 컴포넌트에서 전달된 커스텀 이벤트 정의
-
+const { isShow, toggle } = inject(toggleChildrenKey) as ToggleChildrenValue;
 </script>
 
 <template>
   <WrapperBox title="Child" color="#375fff">
-    <button type="button" class="toggleButton">Hide Grand Children</button>
+    <button type="button" class="toggleButton" @click="toggle">
+      {{ isShow ? 'Hide' : 'Show' }} Grand Child
+    </button>
     <GrandChild />
     <GrandChild />
   </WrapperBox>

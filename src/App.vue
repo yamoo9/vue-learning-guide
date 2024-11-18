@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import Navigation from '@/components/AppNavigation.vue';
 import ComponentFundamentals from '@/views/ComponentFundamentals.vue';
-import PropsDrilling from '@/views/PropsDrillingDemo/PropsDrilling.vue';
+import PropsDrilling from '@/views/guides/PropsDrilling/PropsDrilling.vue';
 import RegisterForm from '@/views/RegisterForm.vue';
 
 const navigationList = ref<INavigationItem[]>([
@@ -29,7 +29,10 @@ const changeRenderView = (viewMode: RenderView) => {
   renderView.value = viewMode;
 };
 
-const handleChangeRenderView = (viewMode: RenderView, payload?: FormPayload) => {
+const handleChangeRenderView = (
+  viewMode: RenderView,
+  payload?: FormPayload
+) => {
   changeRenderView(viewMode === 'submitted' ? 'home' : viewMode);
   if (payload) alert(JSON.stringify(payload, null, 2));
 };
