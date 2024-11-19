@@ -1,8 +1,19 @@
 <script setup lang="ts">
-import { computed, ref, defineAsyncComponent, Suspense } from 'vue';
+import { computed, ref, defineAsyncComponent } from 'vue';
 import Navigation from '@/components/AppNavigation.vue';
 import AppSpinner from '@/components/AppSpinner.vue';
-import ComponentFundamentals from '@/views/ComponentFundamentals.vue';
+
+const ComponentFundamentals = defineAsyncComponent(
+  () => import('@/views/ComponentFundamentals.vue')
+);
+
+const RegisterForm = defineAsyncComponent(
+  () => import('@/views/RegisterForm.vue')
+);
+
+const ProvideInject = defineAsyncComponent(
+  () => import('@/views/ProvideInject/ProvideInject.vue')
+);
 
 const navigationList = ref<INavigationItem[]>([
   {
@@ -17,8 +28,8 @@ const navigationList = ref<INavigationItem[]>([
   },
   {
     id: 3,
-    href: '/props-drilling',
-    viewMode: 'props drilling',
+    href: '/provide-inject',
+    viewMode: 'provide inject',
   },
 ]);
 
@@ -28,15 +39,13 @@ const changeRenderView = (viewMode: RenderView) => {
   renderView.value = viewMode;
 };
 
-const handleChangeRenderView = (viewMode: RenderView, payload?: FormPayload) => {
+const handleChangeRenderView = (
+  viewMode: RenderView,
+  payload?: FormPayload
+) => {
   changeRenderView(viewMode === 'submitted' ? 'home' : viewMode);
   if (payload) alert(JSON.stringify(payload, null, 2));
 };
-
-const AsyncRegisterForm = defineAsyncComponent(() => import('@/views/RegisterForm.vue'));
-const AsyncPropsDrilling = defineAsyncComponent(
-  () => import('@/views/PropsDrilling/PropsDrilling.vue')
-);
 
 const render = computed(() => {
   switch (renderView.value) {
@@ -48,12 +57,12 @@ const render = computed(() => {
       };
     case 'form':
       return {
-        component: AsyncRegisterForm,
+        component: RegisterForm,
         eventHandlers: { changeRenderView: handleChangeRenderView },
       };
-    case 'props drilling':
+    case 'provide inject':
       return {
-        component: AsyncPropsDrilling,
+        component: ProvideInject,
         eventHandlers: {},
       };
   }
