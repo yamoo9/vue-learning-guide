@@ -1,14 +1,24 @@
 <script setup lang="ts">
 import WrapperBox from '@/components/WrapperBox.vue';
-import useMouse from '@/composables/useMouse';
 import Child from './Child.vue';
+import { toRefs } from 'vue';
 
-const mouse = useMouse(true);
+interface Props {
+  isShow?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), { isShow: false });
+const { isShow } = toRefs(props);
+
+interface Emits {
+  (e: 'toggle'): void;
+}
+
+const emit = defineEmits<Emits>();
 </script>
 
 <template>
   <WrapperBox title="Parent">
-    <p>{{ mouse }}</p>
-    <Child />
+    <Child :isShow="isShow" @toggle="emit('toggle')" />
   </WrapperBox>
 </template>

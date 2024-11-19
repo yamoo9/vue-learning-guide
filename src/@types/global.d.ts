@@ -1,4 +1,9 @@
-type RenderView = 'home' | 'form' | 'submitted' | 'props drilling';
+type RenderView =
+  | 'home'
+  | 'form'
+  | 'submitted'
+  | 'props drilling'
+  | 'provide inject';
 
 interface INavigationItem {
   id: number;
