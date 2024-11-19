@@ -17,7 +17,7 @@ provide(toggleChildrenKey, {
 
 <template>
   <div lang="en">
-    <h1 class="headline" lang="ko-KR">프롭스 드릴링 이슈</h1>
+    <h1 class="headline" lang="ko-KR">프로바이드 &amp; 인젝트</h1>
     <Parent />
   </div>
 </template>
