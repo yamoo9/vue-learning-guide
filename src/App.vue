@@ -11,6 +11,10 @@ const RegisterForm = defineAsyncComponent(
   () => import('@/views/RegisterForm.vue')
 );
 
+const PropsDrilling = defineAsyncComponent(
+  () => import('@/views/PropsDrilling/PropsDrilling.vue')
+);
+
 const ProvideInject = defineAsyncComponent(
   () => import('@/views/ProvideInject/ProvideInject.vue')
 );
@@ -28,6 +32,11 @@ const navigationList = ref<INavigationItem[]>([
   },
   {
     id: 3,
+    href: '/props-drilling',
+    viewMode: 'props drilling',
+  },
+  {
+    id: 4,
     href: '/provide-inject',
     viewMode: 'provide inject',
   },
@@ -59,6 +68,11 @@ const render = computed(() => {
       return {
         component: RegisterForm,
         eventHandlers: { changeRenderView: handleChangeRenderView },
+      };
+    case 'props drilling':
+      return {
+        component: PropsDrilling,
+        eventHandlers: {},
       };
     case 'provide inject':
       return {
