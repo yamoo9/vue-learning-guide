@@ -26,9 +26,13 @@ const initialFormData: IFormData = {
 
 const formData = reactive<IFormData>({ ...initialFormData });
 
-const isAllInputed = computed<boolean>(() => Object.values(formData).every(Boolean));
+const isAllInputed = computed<boolean>(() =>
+  Object.values(formData).every(Boolean)
+);
 
-const isInputedOneOfThem = computed<boolean>(() => Object.values(formData).some(Boolean));
+const isInputedOneOfThem = computed<boolean>(() =>
+  Object.values(formData).some(Boolean)
+);
 
 const handleSubmit = () => {
   const nameInput = nameRef.value;
@@ -50,7 +54,9 @@ const handleSubmit = () => {
 
   if (!checkPassword(password)) {
     passwordInput?.select();
-    return console.error('패스워드는 숫자, 문자, 특수문자 조합 6자리 이상 입력해야 합니다.');
+    return console.error(
+      '패스워드는 숫자, 문자, 특수문자 조합 6자리 이상 입력해야 합니다.'
+    );
   }
 
   if (password !== passwordConfirm) {
@@ -75,7 +81,12 @@ const handleReset = () => {
 </script>
 
 <template>
-  <form class="form" novalidate @submit.prevent="handleSubmit" @reset.prevent="handleReset">
+  <form
+    class="form"
+    novalidate
+    @submit.prevent="handleSubmit"
+    @reset.prevent="handleReset"
+  >
     <FormInput
       ref="nameRef"
       id="userName"
@@ -87,7 +98,7 @@ const handleReset = () => {
       ref="emailRef"
       type="email"
       id="userEmail"
-      label="사용자 이름"
+      label="이메일"
       placeholder="user@company.io"
       v-model="formData.email"
     />
@@ -108,7 +119,10 @@ const handleReset = () => {
       v-model="formData.passwordConfirm"
     />
 
-    <FormButtonGroup :isAllInputed="isAllInputed" :isInputedOneOfThem="isInputedOneOfThem" />
+    <FormButtonGroup
+      :isAllInputed="isAllInputed"
+      :isInputedOneOfThem="isInputedOneOfThem"
+    />
   </form>
   <AppPre>{{ formData }}</AppPre>
 </template>
