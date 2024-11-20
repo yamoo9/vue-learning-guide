@@ -7,16 +7,9 @@ import FormInput from '@/components/FormInput.vue';
 import checkPassword from '@/utils/checkPassword';
 import checkEmail from '@/utils/checkEmail';
 
-useHead({
-  title: () => '회원가입 | Vue 러닝 가이드',
-  meta: () => [
-    {
-      name: 'description',
-      content:
-        'Vue.js 웹 애플리케이션에서 회원가입 폼을 구현하는 예시입니다. 이 페이지에서는 회원가입 폼을 구현하고, 검증을 통해 사용자 이름, 이메일, 패스워드를 입력할 수 있습니다.',
-    },
-  ],
-});
+interface IExportInput {
+  input: HTMLInputElement | null;
+}
 
 interface Emits {
   (e: 'changeRenderView', view: RenderView, payload?: FormPayload): void;
@@ -24,10 +17,13 @@ interface Emits {
 
 const emit = defineEmits<Emits>();
 
-const nameRef = ref<HTMLInputElement | null>(null);
-const emailRef = ref<HTMLInputElement | null>(null);
-const passwordRef = ref<HTMLInputElement | null>(null);
-const passwordConfirmRef = ref<HTMLInputElement | null>(null);
+const nameRef = ref<IExportInput>({ input: null });
+const emailRef = ref<IExportInput>({ input: null });
+const passwordRef = ref<IExportInput>({ input: null });
+const passwordConfirmRef = ref<IExportInput>({ input: null });
+
+// ProfileUpload의 <input> 참조
+
 
 const initialFormData: IFormData = {
   name: '',
@@ -36,21 +32,36 @@ const initialFormData: IFormData = {
   passwordConfirm: '',
 };
 
-const formData = reactive<IFormData>({ ...initialFormData });
+const formData: IFormData = reactive({ ...initialFormData });
 
-const isAllInputed = computed<boolean>(() =>
-  Object.values(formData).every(Boolean)
-);
+const isAllInputed = computed(() => Object.values(formData).every(Boolean));
 
-const isInputedOneOfThem = computed<boolean>(() =>
-  Object.values(formData).some(Boolean)
-);
+const isInputedOneOfThem = computed(() => {
+  const formDataWithoutProfileImage = Object.fromEntries(
+    Object.entries(formData).filter(([key]) => !key.includes('profile'))
+  );
 
+  return Object.values(formDataWithoutProfileImage).some(Boolean);
+});
+
+// 비동기 함수로 변경
 const handleSubmit = () => {
-  const nameInput = nameRef.value;
-  const emailInput = emailRef.value;
-  const passwordInput = passwordRef.value;
-  const passwordConfirmInput = passwordConfirmRef.value;
+  const nameInput = nameRef.value?.input;
+  const emailInput = emailRef.value?.input;
+  const passwordInput = passwordRef.value?.input;
+  const passwordConfirmInput = passwordConfirmRef.value?.input;
+  
+  // 프로필 이미지 <input> 요소 참조
+
+  // 업로드 할 프로필 이미지 파일 참조
+  
+  // 업로드 할 프로필 이미지 파일 참조가 있을 경우
+    // 업로드 폼 데이터 생성
+    // 업로드 폼 데이터에 image 추가
+      // 프로필 이미지 업로드 요청
+      // 응답 결과에서 데이터 추출
+      // formData.profileImage 속성에 데이터의 이미지 경로 설정
+
 
   const { name, email, password, passwordConfirm } = formData;
 
@@ -87,9 +98,20 @@ const handleSubmit = () => {
 
 const handleReset = () => {
   for (const [key, value] of Object.entries(initialFormData)) {
-    formData[key] = value;
+    formData[key as keyof IFormData] = value;
   }
 };
+
+useHead({
+  title: () => '회원가입 | Vue 러닝 가이드',
+  meta: () => [
+    {
+      name: 'description',
+      content:
+        'Vue.js 웹 애플리케이션에서 회원가입 폼을 구현하는 예시입니다. 이 페이지에서는 회원가입 폼을 구현하고, 검증을 통해 사용자 이름, 이메일, 패스워드를 입력할 수 있습니다.',
+    },
+  ],
+});
 </script>
 
 <template>
@@ -130,6 +152,9 @@ const handleReset = () => {
       placeholder="입력한 패스워드 다시 입력"
       v-model="formData.passwordConfirm"
     />
+
+    <!-- ProfileUpload 삽입 -->
+
 
     <FormButtonGroup
       :isAllInputed="isAllInputed"
