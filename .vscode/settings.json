@@ -106,6 +106,7 @@
   "codeium.enableCodeLens": false,
   "codeium.enableConfig": { 
     "*": true,
+    "vue": false,
     "javascript": false,
     "javascriptreact": false,
     "typescript": false,

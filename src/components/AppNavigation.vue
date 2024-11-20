@@ -22,7 +22,6 @@ const assignActiveClass = (mode: RenderView) => {
 };
 
 const handleChange = (viewMode: RenderView) => {
-  // console.log(viewMode);
   emit('changeRenderView', viewMode);
 };
 </script>
