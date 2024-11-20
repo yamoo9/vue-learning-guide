@@ -31,7 +31,7 @@ interface IFormData {
   email: string;
   password: string;
   passwordConfirm: string;
-  [key: string]: string;
+  profileImage?: string;
 }
 
 type FormPayload = Omit<IFormData, 'passwordConfirm'>;
