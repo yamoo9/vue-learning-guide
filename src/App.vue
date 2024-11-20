@@ -1,8 +1,27 @@
 <script setup lang="ts">
-import { computed, ref, defineAsyncComponent, Suspense } from 'vue';
+import { computed, ref, defineAsyncComponent } from 'vue';
 import Navigation from '@/components/AppNavigation.vue';
 import AppSpinner from '@/components/AppSpinner.vue';
-import ComponentFundamentals from '@/views/ComponentFundamentals.vue';
+
+const AsyncComponentFundamentals = defineAsyncComponent(
+  () => import('@/views/ComponentFundamentals.vue')
+);
+
+const AsyncRegisterForm = defineAsyncComponent(
+  () => import('@/views/RegisterForm.vue')
+);
+
+const AsyncPropsDrilling = defineAsyncComponent(
+  () => import('@/views/PropsDrilling/PropsDrilling.vue')
+);
+
+const AsyncCustomDirective = defineAsyncComponent(
+  () => import('@/views/CustomDirective.vue')
+);
+
+const AsyncAnimation = defineAsyncComponent(
+  () => import('@/views/Animation.vue')
+);
 
 const navigationList = ref<INavigationItem[]>([
   {
@@ -38,23 +57,20 @@ const changeRenderView = (viewMode: RenderView) => {
   renderView.value = viewMode;
 };
 
-const handleChangeRenderView = (viewMode: RenderView, payload?: FormPayload) => {
+const handleChangeRenderView = (
+  viewMode: RenderView,
+  payload?: FormPayload
+) => {
   changeRenderView(viewMode === 'submitted' ? 'home' : viewMode);
   if (payload) alert(JSON.stringify(payload, null, 2));
 };
-
-const AsyncRegisterForm = defineAsyncComponent(() => import('@/views/RegisterForm.vue'));
-const AsyncPropsDrilling = defineAsyncComponent(() => import('@/views/PropsDrilling/PropsDrilling.vue'));
-const AsyncCustomDirective = defineAsyncComponent(() => import('@/views/CustomDirective.vue'));
-
-const ASyncAnimation = defineAsyncComponent(() => import('@/views/Animation.vue'));
 
 const render = computed(() => {
   switch (renderView.value) {
     default:
     case 'home':
       return {
-        component: ComponentFundamentals,
+        component: AsyncComponentFundamentals,
         eventHandlers: {},
       };
     case 'form':
@@ -74,7 +90,7 @@ const render = computed(() => {
       };
     case 'animation':
       return {
-        component: ASyncAnimation,
+        component: AsyncAnimation,
         eventHandlers: {},
       };
   }
@@ -82,7 +98,11 @@ const render = computed(() => {
 </script>
 
 <template>
-  <Navigation :list="navigationList" :renderView="renderView" @changeRenderView="handleChangeRenderView" />
+  <Navigation
+    :list="navigationList"
+    :renderView="renderView"
+    @changeRenderView="handleChangeRenderView"
+  />
   <KeepAlive :max="10">
     <Suspense timeout="0">
       <component :is="render.component" v-on="render.eventHandlers" />
