@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import vueLogo from '@/assets/vue.svg';
-import useIsShow from '@/composables/useIsShow';
-
-const { isShow, toggle } = useIsShow(true);
 </script>
 
 <template>
   <main class="transitionDemo" lang="en">
-    <button type="button" class="button" @click="toggle">
-      {{ isShow ? 'Hide' : 'Show' }}
-    </button>
-    <div v-show="isShow" class="box">
+    <button type="button" class="button">Hide</button>
+    <div class="box">
       <img :src="vueLogo" alt="Vue.js logo" height="60" />
     </div>
   </main>

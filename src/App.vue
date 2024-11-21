@@ -1,8 +1,35 @@
 <script setup lang="ts">
-import { computed, ref, defineAsyncComponent, Suspense } from 'vue';
+import { computed, ref, defineAsyncComponent } from 'vue';
 import Navigation from '@/components/AppNavigation.vue';
 import AppSpinner from '@/components/AppSpinner.vue';
-import ComponentFundamentals from '@/views/ComponentFundamentals.vue';
+
+const AsyncComponentFundamentals = defineAsyncComponent(
+  () => import('@/views/ComponentFundamentals.vue')
+);
+
+const AsyncRegisterForm = defineAsyncComponent(
+  () => import('@/views/RegisterForm.vue')
+);
+
+const AsyncPropsDrilling = defineAsyncComponent(
+  () => import('@/views/PropsDrilling/PropsDrilling.vue')
+);
+
+const AsyncCustomDirective = defineAsyncComponent(
+  () => import('@/views/CustomDirective.vue')
+);
+
+const AsyncAnimation = defineAsyncComponent(
+  () => import('@/views/Animation.vue')
+);
+
+const AsyncTransition = defineAsyncComponent(
+  () => import('@/views/Transition.vue')
+);
+
+const AsyncTransitionGroup = defineAsyncComponent(
+  () => import('@/views/TransitionGroup.vue')
+);
 
 const navigationList = ref<INavigationItem[]>([
   {
@@ -10,21 +37,21 @@ const navigationList = ref<INavigationItem[]>([
     href: '/',
     viewMode: 'home',
   },
-  {
-    id: 2,
-    href: '/form',
-    viewMode: 'form',
-  },
-  {
-    id: 3,
-    href: '/props-drilling',
-    viewMode: 'props drilling',
-  },
-  {
-    id: 4,
-    href: '/custom-directive',
-    viewMode: 'custom directive',
-  },
+  // {
+  //   id: 2,
+  //   href: '/form',
+  //   viewMode: 'form',
+  // },
+  // {
+  //   id: 3,
+  //   href: '/props-drilling',
+  //   viewMode: 'props drilling',
+  // },
+  // {
+  //   id: 4,
+  //   href: '/custom-directive',
+  //   viewMode: 'custom directive',
+  // },
   {
     id: 5,
     href: '/animation',
@@ -48,29 +75,20 @@ const changeRenderView = (viewMode: RenderView) => {
   renderView.value = viewMode;
 };
 
-const handleChangeRenderView = (viewMode: RenderView, payload?: FormPayload) => {
+const handleChangeRenderView = (
+  viewMode: RenderView,
+  payload?: FormPayload
+) => {
   changeRenderView(viewMode === 'submitted' ? 'home' : viewMode);
   if (payload) alert(JSON.stringify(payload, null, 2));
 };
-
-const AsyncRegisterForm = defineAsyncComponent(() => import('@/views/RegisterForm.vue'));
-const AsyncPropsDrilling = defineAsyncComponent(
-  () => import('@/views/PropsDrilling/PropsDrilling.vue')
-);
-const AsyncCustomDirective = defineAsyncComponent(() => import('@/views/CustomDirective.vue'));
-
-const AsyncAnimation = defineAsyncComponent(() => import('@/views/Animation.vue'));
-
-const AsyncTransition = defineAsyncComponent(() => import('@/views/Transition.vue'));
-
-const AsyncTransitionGroup = defineAsyncComponent(() => import('@/views/TransitionGroup.vue'));
 
 const render = computed(() => {
   switch (renderView.value) {
     default:
     case 'home':
       return {
-        component: ComponentFundamentals,
+        component: AsyncComponentFundamentals,
         eventHandlers: {},
       };
     case 'form':
