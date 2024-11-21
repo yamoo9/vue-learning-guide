@@ -4,7 +4,7 @@ import { computed, reactive, ref } from 'vue';
 
 const LECTURES = 'Vuex,Pinia,Nuxt.js,Vite,TypeScript,Tailwind CSS,Sass';
 
-const list = reactive<{ id: string; text: string }[]>([
+const list = reactive([
   {
     id: crypto.randomUUID(),
     text: 'Vue.js (1)',
@@ -94,9 +94,25 @@ function handleLeave(el: HTMLElement, done: () => void) {
     <input type="search" id="search" v-model="searchTerm" />
   </form>
   <div class="buttonGroup" role="group">
-    <button type="button" class="button" v-capitalize @click="handleAddContent">add</button>
-    <button type="button" class="button" v-capitalize @click="handleRemoveContent">remove</button>
-    <button type="button" class="button" v-capitalize @click="handleShuffleContent">shuffle</button>
+    <button type="button" class="button" v-capitalize @click="handleAddContent">
+      add
+    </button>
+    <button
+      type="button"
+      class="button"
+      v-capitalize
+      @click="handleRemoveContent"
+    >
+      remove
+    </button>
+    <button
+      type="button"
+      class="button"
+      v-capitalize
+      @click="handleShuffleContent"
+    >
+      shuffle
+    </button>
   </div>
   <TransitionGroup
     name="lecture-list"
@@ -106,7 +122,11 @@ function handleLeave(el: HTMLElement, done: () => void) {
     @enter="handleEnter"
     @leave="handleLeave"
   >
-    <li v-for="(item, index) in searchedList" :key="item.id" :data-index="index + 1">
+    <li
+      v-for="(item, index) in searchedList"
+      :key="item.id"
+      :data-index="index + 1"
+    >
       {{ item.text }}
     </li>
   </TransitionGroup>
@@ -115,6 +135,7 @@ function handleLeave(el: HTMLElement, done: () => void) {
 <style>
 .searchForm {
   margin-block-start: 100px;
+  margin-inline: 80px;
 
   display: flex;
   align-items: center;
