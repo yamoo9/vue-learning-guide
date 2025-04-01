@@ -1,5 +1,6 @@
 // --------------------------------------------------------------------------
-// destructuring assignment
+// Destructuring Assignment
+// --------------------------------------------------------------------------
 // - 구조 분해 할당 구문을 사용해 배열의 개별 항목 분해 및 할당
 // - 구조 분해 할당 구문을 사용해 객체의 개별 항목 분해 및 할당
 // - 콜백 함수의 매개변수를 구조 분해 할당하여 활용
@@ -21,15 +22,15 @@ const courses = [
     title: 'Pinia 펀더멘탈',
     url: 'https://fundamentals.dev/pinia',
   },
-];
+]
 
 function spreadArray() {
   {
-    const vueCourse = courses[0];
-    const restCourses = courses.slice(1);
+    const vueCourse = courses[0]
+    const restCourses = courses.slice(1)
 
-    console.log(vueCourse);
-    console.log(restCourses);
+    console.log(vueCourse)
+    console.log(restCourses)
   }
 
   // 🔶 구조 분해 할당 구문을 사용해 courses 배열에서 항목을 분해 및 할당합니다.
@@ -40,16 +41,16 @@ function spreadArray() {
 }
 
 function spreadObject() {
-  const [vueCourse] = courses;
+  const [vueCourse] = courses
 
   {
-    let vueCourseId = vueCourse.id;
-    let vueCourseTitle = vueCourse.title;
-    let vueCourseUrl = vueCourse.url;
+    let vueCourseId = vueCourse.id
+    let vueCourseTitle = vueCourse.title
+    let vueCourseUrl = vueCourse.url
 
-    console.log(vueCourseId);
-    console.log(vueCourseTitle);
-    console.log(vueCourseUrl);
+    console.log(vueCourseId)
+    console.log(vueCourseTitle)
+    console.log(vueCourseUrl)
   }
 
   // 🔶 구조 분해 할당 구문을 사용해 vueCourse 객체에서 항목을 분해 및 할당합니다.
@@ -68,10 +69,10 @@ function spreadRender() {
       { headline: '스팸치즈볶음밥', content: 7500 },
       { headline: '불고기낙지덮밥', content: 9000 },
     ],
-  };
+  }
 
-  const rendredResult = renderTable(koreanFoods);
-  console.log(rendredResult);
+  const rendredResult = renderTable(koreanFoods)
+  console.log(rendredResult)
 
   function renderTable(data) {
     return removeSpaceHTMLString(/* html */ `
@@ -89,27 +90,27 @@ function spreadRender() {
                 <td>${numberWithComma(item.content)}원</td>
               </tr>
             `
-          );
+          )
         }, '')}
       </table>
-    `);
+    `)
   }
 }
 
 function numberWithComma(numberValue) {
-  return numberValue.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+  return numberValue.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
 function removeSpaceHTMLString(htmlString) {
   return htmlString.replace(/\s+<|\n|>\s+/g, function ($1) {
-    return $1.indexOf('<') > -1 ? '<' : $1.indexOf('>') > -1 ? '>' : '';
-  });
+    return $1.indexOf('<') > -1 ? '<' : $1.indexOf('>') > -1 ? '>' : ''
+  })
 }
 
 function run() {
-  spreadArray();
-  spreadObject();
-  spreadRender();
+  spreadArray()
+  spreadObject()
+  spreadRender()
 }
 
-run();
+run()
