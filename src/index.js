@@ -1,6 +1,6 @@
 import './styles/globals.css';
-// import jsImagePath from './assets/javascript.svg';
 
+// import jsonData from './data.json';
 const jsonData = await import('./data.json');
 
 const vm = (globalThis.vm = new Proxy(
