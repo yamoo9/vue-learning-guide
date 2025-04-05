@@ -1,45 +1,45 @@
 import {
   createApp,
-  ref,
   reactive,
   computed,
+  ref,
   watch,
   watchEffect,
-} from 'https://esm.sh/vue/dist/vue.esm-browser.js';
+} from 'https://esm.sh/vue/dist/vue.esm-browser.js'
 
-import './styles/globals.css';
+import './styles/globals.css'
 
-const vueApp = createApp({
+const app = createApp({
   setup() {
-    const mails = reactive([]);
+    const mails = reactive([])
     watchEffect(async () => {
       if (mails.length === 0) {
-        const { default: data } = await import('./data/mails.json');
-        data.forEach((item) => mails.push(item));
+        const { default: data } = await import('./data/mails.json')
+        data.forEach((item) => mails.push(item))
       }
-    });
+    })
 
-    const reverseSortedMails = computed(() => mails.toReversed());
+    const reverseSortedMails = computed(() => mails.toReversed())
 
-    const allChecked = ref(false);
+    const allChecked = ref(false)
     const handleAllChecked = (e) => {
-      mails.forEach((mail) => (mail.checked = e.target.checked));
-    };
+      mails.forEach((mail) => (mail.checked = e.target.checked))
+    }
 
     const totalCheckedCount = computed(() =>
-      mails.reduce((total, mail) => total + (mail.checked ? 1 : 0), 0)
-    );
+      mails.reduce((total, mail) => total + (mail.checked ? 1 : 0), 0),
+    )
     watch(totalCheckedCount, (count) => {
       if (count === mails.length) {
-        allChecked.value = true;
+        allChecked.value = true
       } else {
-        allChecked.value = false;
+        allChecked.value = false
       }
-    });
+    })
 
     const totalReadCount = computed(() =>
-      mails.reduce((total, mail) => total + (mail.read ? 1 : 0), 0)
-    );
+      mails.reduce((total, mail) => total + (mail.read ? 1 : 0), 0),
+    )
 
     return {
       mails,
@@ -48,7 +48,7 @@ const vueApp = createApp({
       totalCheckedCount,
       totalReadCount,
       handleAllChecked,
-    };
+    }
   },
 
   template: /* html */ `
@@ -116,6 +116,6 @@ const vueApp = createApp({
       </tfoot>
     </table>
   `,
-});
+}).mount('#app')
 
-globalThis.vm = vueApp.mount('#app');
+globalThis.vm = app
