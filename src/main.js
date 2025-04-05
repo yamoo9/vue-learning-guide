@@ -1,72 +1,72 @@
-import './styles/globals.css';
-import spinner from './assets/spinner.svg';
+import './styles/globals.css'
+import spinner from './assets/spinner.svg'
 import {
   createApp,
-  ref,
   reactive,
   computed,
-} from 'https://esm.sh/vue/dist/vue.esm-browser.js';
+  ref,
+} from 'https://esm.sh/vue/dist/vue.esm-browser.js'
 
-const vueApp = createApp({
+const app = createApp({
   setup() {
-    const renderView = ref('form');
-    const isFormRender = computed(() => renderView.value.includes('form'));
+    const renderView = ref('form')
+    const isFormRender = computed(() => renderView.value.includes('form'))
     const printButtonLabel = computed(() =>
-      isFormRender.value ? '댓글 목록 보기' : '입력 폼 보기'
-    );
+      isFormRender.value ? '댓글 목록 보기' : '입력 폼 보기',
+    )
 
-    let commentId = 1;
-    const comments = reactive([]);
-    const reversedComments = computed(() => comments.toReversed());
+    let commentId = 1
+    const comments = reactive([])
+    const reversedComments = computed(() => comments.toReversed())
 
     const handleChangeView = () => {
-      renderView.value = isFormRender.value ? 'comments' : 'form';
-    };
+      renderView.value = isFormRender.value ? 'comments' : 'form'
+    }
 
     const formData = reactive({
       title: '',
       content: '',
-    });
+    })
 
     const isOneInputed = computed(() => {
-      const { title, content } = formData;
-      return title.trim().length > 0 || content.trim().length > 0;
-    });
+      const { title, content } = formData
+      return title.trim().length > 0 || content.trim().length > 0
+    })
 
     const isAllInputed = computed(() => {
-      const { title, content } = formData;
-      return title.trim().length > 0 && content.trim().length > 0;
-    });
+      const { title, content } = formData
+      return title.trim().length > 0 && content.trim().length > 0
+    })
 
     const handleInput = ({ target }) => {
-      formData[target.name] = target.value;
-    };
+      formData[target.name] = target.value
+    }
 
     const handleSaveComment = () => {
-      const { title, content } = formData;
+      const { title, content } = formData
 
       comments.push({
         id: commentId++,
         title,
         content,
-      });
+      })
 
-      renderView.value = 'comments';
+      renderView.value = 'comments'
 
-      handleResetComment();
-    };
+      handleResetComment()
+    }
 
     const handleResetComment = () => {
-      formData.title = '';
-      formData.content = '';
-    };
+      formData.title = ''
+      formData.content = ''
+    }
 
     const handleCheckDisabled = (e) => {
       if (e.target.getAttribute('aria-disabled') === 'true') {
-        e.preventDefault();
-        alert('🚨 제목과 내용이 입력 되어야 저장 또는 취소할 수 있습니다.');
+        e.preventDefault()
+        alert('🚨 제목과 내용이 입력 되어야 저장 또는 취소할 수 있습니다.')
       }
-    };
+    }
 
     return {
       isFormRender,
@@ -82,7 +82,7 @@ const vueApp = createApp({
       handleCheckDisabled,
       handleResetComment,
       spinner,
-    };
+    }
   },
 
   template: /* html */ `
@@ -160,6 +160,6 @@ const vueApp = createApp({
       </p>
     </section>
   `,
-});
+}).mount('#app')
 
-globalThis.vm = vueApp.mount('#app');
+globalThis.vm = app
