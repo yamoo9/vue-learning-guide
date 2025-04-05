@@ -1,35 +1,35 @@
 import {
   createApp,
-  ref,
   computed,
-} from 'https://esm.sh/vue/dist/vue.esm-browser.js';
-import jsonData from './data.json';
-import './styles/globals.css';
+  ref,
+} from 'https://esm.sh/vue/dist/vue.esm-browser.js'
+import data from './data.json'
+import './styles/globals.css'
 
-const vueApp = createApp({
+const app = createApp({
   setup() {
-    const headline = ref(jsonData.headline);
+    const headline = ref(data.headline)
     const convertHeadline = computed(() =>
       headline.value.replace(/javascript/i, 'ue')
-    );
+    )
 
-    const description = ref(jsonData.description);
+    const description = ref(data.description)
     const convertDescription = computed(() =>
       description.value.replace(/javascript/i, 'Vue')
-    );
+    )
 
-    const logos = ref(jsonData.logos);
-    const showLogo = ref(true);
-    const changeLogoOrText = () => (showLogo.value = !showLogo.value);
+    const logos = ref(data.logos)
+    const showLogo = ref(true)
+    const changeLogoOrText = () => (showLogo.value = !showLogo.value)
 
-    const count = ref(jsonData.count);
-    const increaseCount = () => count.value++;
+    const count = ref(data.count)
+    const increaseCount = () => count.value++
 
     const lectureSubjects = ref([
       'Vue 라이브러리',
       'Vue Router 라이브러리',
       'Pinia 라이브러리',
-    ]);
+    ])
 
     return {
       headline,
@@ -42,7 +42,7 @@ const vueApp = createApp({
       count,
       increaseCount,
       lectureSubjects,
-    };
+    }
   },
   template: /* html */ `
 	  <h1>
@@ -70,6 +70,6 @@ const vueApp = createApp({
       <li>Pinia 라이브러리</li>
     </ul>
   `,
-});
+}).mount('#app')
 
-globalThis.vm = vueApp.mount('#app');
+globalThis.vm = app
