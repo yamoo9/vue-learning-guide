@@ -1,46 +1,46 @@
 import {
   createApp,
-  ref,
   reactive,
+  ref,
   onBeforeMount,
-} from 'https://esm.sh/vue/dist/vue.esm-browser.js';
-import spinner from './assets/spinner.svg';
-import delay from './utils/delay';
-import './styles/globals.css';
+} from 'https://esm.sh/vue/dist/vue.esm-browser.js'
+import spinner from './assets/spinner.svg'
+import delay from './utils/delay'
+import './styles/globals.css'
 
-const vueApp = createApp({
+const app = createApp({
   setup() {
-    const quoteId = ref(1);
-    
+    const quoteId = ref(1)
+
     const state = reactive({
       isLoading: false,
       data: null,
       error: null,
-    });
+    })
 
     const fetchQuote = async (id) => {
-      state.isLoading = true;
+      state.isLoading = true
       try {
-        const response = await fetch(`https://dummyjson.com/quotes/${id}`);
-        const jsonData = await response.json();
-        await delay(Math.random() * 1000);
-        state.data = jsonData;
+        const response = await fetch(`https://dummyjson.com/quotes/${id}`)
+        const jsonData = await response.json()
+        await delay(Math.random() * 1000)
+        state.data = jsonData
       } catch (error) {
-        state.error = error;
+        state.error = error
       } finally {
-        state.isLoading = false;
+        state.isLoading = false
       }
-    };
+    }
 
     onBeforeMount(() => {
-      fetchQuote(quoteId.value);
-    });
+      fetchQuote(quoteId.value)
+    })
 
     return {
       quoteId,
       state,
       spinner,
-    };
+    }
   },
 
   template: /* html */ `
@@ -63,6 +63,6 @@ const vueApp = createApp({
       <span>{{state.data.author}}</span>
     </article>
   `,
-});
+}).mount('#app')
 
-globalThis.vm = vueApp.mount('#app');
+globalThis.vm = app
