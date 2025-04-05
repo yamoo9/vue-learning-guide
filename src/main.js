@@ -1,51 +1,51 @@
 import {
   createApp,
-  ref,
   reactive,
   computed,
+  ref,
   watchEffect,
-} from 'https://esm.sh/vue/dist/vue.esm-browser.js';
-import spinner from './assets/spinner.svg';
-import delay from './utils/delay';
-import './styles/globals.css';
+} from 'https://esm.sh/vue/dist/vue.esm-browser.js'
+import spinner from './assets/spinner.svg'
+import delay from './utils/delay'
+import './styles/globals.css'
 
-const vueApp = createApp({
+const app = createApp({
   setup() {
-    const quoteId = ref(1);
+    const quoteId = ref(1)
     const state = reactive({
       isLoading: false,
       data: null,
       error: null,
-    });
+    })
 
-    const isStopQuoteId = computed(() => quoteId.value > 3);
+    const isStopQuoteId = computed(() => quoteId.value > 3)
 
     const unwatch = watchEffect(async () => {
       if (isStopQuoteId.value) {
-        unwatch();
+        unwatch()
       }
 
-      state.isLoading = true;
+      state.isLoading = true
       try {
         const response = await fetch(
-          `https://dummyjson.com/quotes/${quoteId.value}`
-        );
-        const jsonData = await response.json();
-        await delay(Math.random() * 1500);
-        state.data = jsonData;
+          `https://dummyjson.com/quotes/${quoteId.value}`,
+        )
+        const jsonData = await response.json()
+        await delay(Math.random() * 1500)
+        state.data = jsonData
       } catch (error) {
-        state.error = error;
+        state.error = error
       } finally {
-        state.isLoading = false;
+        state.isLoading = false
       }
-    });
+    })
 
     return {
       state,
       spinner,
       quoteId,
       isStopQuoteId,
-    };
+    }
   },
 
   template: /* html */ `
@@ -78,6 +78,6 @@ const vueApp = createApp({
       No quotes loaded. 😳
     </p>
   `,
-});
+}).mount('#app')
 
-globalThis.vm = vueApp.mount('#app');
+globalThis.vm = app
