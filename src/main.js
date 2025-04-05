@@ -1,58 +1,62 @@
 import {
   createApp,
-  ref,
   computed,
-} from 'https://esm.sh/vue/dist/vue.esm-browser.js';
-import jsonData from './data.json';
-import './styles/globals.css';
+  ref,
+} from 'https://esm.sh/vue/dist/vue.esm-browser.js'
+import data from './data.json'
+import './styles/globals.css'
 
-const vueApp = createApp({
+const app = createApp({
   setup() {
-    const headline = ref(jsonData.headline);
+    const headline = ref(data.headline)
     const convertHeadline = computed(() =>
-      headline.value.replace(/javascript/i, 'ue')
-    );
+      headline.value.replace(/javascript/i, 'ue'),
+    )
 
-    const description = ref(jsonData.description);
+    const description = ref(data.description)
     const convertDescription = computed(() =>
-      description.value.replace(/javascript/i, 'Vue')
-    );
+      description.value.replace(/javascript/i, 'Vue'),
+    )
 
-    const logos = ref(jsonData.logos);
-    const showLogo = ref(true);
-    const changeLogoOrText = () => (showLogo.value = !showLogo.value);
+    const logos = ref(data.logos)
+    const showLogo = ref(true)
+    const changeLogoOrText = () => (showLogo.value = !showLogo.value)
 
-    const count = ref(jsonData.count);
-    const increaseCount = () => count.value++;
+    const count = ref(data.count)
+    const increaseCount = () => count.value++
 
     const lectureSubjects = ref([
       'Vue 라이브러리',
       'Vue Router 라이브러리',
       'Pinia 라이브러리',
-    ]);
+    ])
 
-    const sortedKey = ref('asc');
+    const sortedKey = ref('asc')
+
+    const isAscSort = computed(() => {
+      return sortedKey.value.includes('asc')
+    })
 
     const sortedLogos = computed(() => {
-      let sortValue = sortedKey.value.includes('asc') ? 1 : -1;
+      let sortValue = sortedKey.value.includes('asc') ? 1 : -1
 
       return Object.fromEntries(
         Object.entries(logos.value).toSorted(([xKey], [yKey]) =>
-          xKey > yKey ? sortValue : xKey < yKey ? sortValue * -1 : 0
-        )
-      );
-    });
+          xKey > yKey ? sortValue : xKey < yKey ? sortValue * -1 : 0,
+        ),
+      )
+    })
 
     const ascSort = ({ type, key }) => {
       if (type === 'click' || (type === 'keydown' && key === 'Enter')) {
-        sortedKey.value = 'asc';
+        sortedKey.value = 'asc'
       }
-    };
+    }
     const descSort = ({ type, key }) => {
       if (type === 'click' || (type === 'keydown' && key === 'Enter')) {
-        sortedKey.value = 'desc';
+        sortedKey.value = 'desc'
       }
-    };
+    }
 
     return {
       headline,
@@ -66,10 +70,11 @@ const vueApp = createApp({
       increaseCount,
       lectureSubjects,
       sortedKey,
+      isAscSort,
       sortedLogos,
       ascSort,
       descSort,
-    };
+    }
   },
   template: /* html */ `
 	  <h1>
@@ -99,35 +104,41 @@ const vueApp = createApp({
 
     <table class="table">
       <caption class="sr-only">로고 정보 표</caption>
-      <tr>
-        <td 
-          role="button" 
-          tabindex="0" 
-          @click="ascSort" 
-          @keydown="ascSort"
-        >
-        오름차순
-        </td>
-        <td 
-          role="button" 
-          tabindex="0" 
-          @click="descSort" 
-          @keydown="descSort"
-        >
-          내림차순
-        </td>
-      </tr>
-      <template v-for="(logoValue, logoKey, index) in sortedLogos" :key="index">
-        <tr v-for="(value, key, logoIndex) in logoValue" :key="key">
-          <th>{{logoKey}}.{{key}}</th>
-          <td v-if="value.startsWith?.('https://')">
-            <a :href="value" target="_blank" rel="noopener noreferrer">{{value}}</a>
+      <tbody>
+        <tr>
+          <td
+            role="button"
+            tabindex="0"
+            :aria-pressed="isAscSort"
+            @click="ascSort"
+            @keydown="ascSort"
+          >
+            <span v-show="isAscSort">✓</span>
+            오름차순
           </td>
-          <td v-else>{{value}}</td>
+          <td
+            role="button"
+            tabindex="0"
+            :aria-pressed="!isAscSort"
+            @click="descSort"
+            @keydown="descSort"
+          >
+            <span v-show="!isAscSort">✓</span>
+            내림차순
+          </td>
         </tr>
-      </template>
+        <template v-for="(logoValue, logoKey, index) in sortedLogos" :key="index">
+          <tr v-for="(value, key, logoIndex) in logoValue" :key="key">
+            <th>{{logoKey}}.{{key}}</th>
+            <td v-if="value.startsWith?.('https://')">
+              <a :href="value" target="_blank" rel="noopener noreferrer">{{value}}</a>
+            </td>
+            <td v-else>{{value}}</td>
+          </tr>
+        </template>
+      </tbody>
     </table>
   `,
-});
+}).mount('#app')
 
-globalThis.vm = vueApp.mount('#app');
+globalThis.vm = app
