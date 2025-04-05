@@ -1,50 +1,22 @@
-import './styles/globals.css';
+import './styles/globals.css'
+import { createApp } from './libs/like-vue.js'
+import jsonData from './data.json'
 
-// import jsonData from './data.json';
-const jsonData = await import('./data.json');
+const app = createApp({
+  data() {
+    return { ...jsonData }
+  },
+  template: /* html */ `
+    <h1>
+      <img src="{{logos.js.src}}" height="{{logos.js.size}}" alt="{{logos.js.label}}" />
+      {{headline}}
+    </h1>
+    <p>{{description}}</p>
+    <button type="button" class="button">{{count}}</button>
+  `,
+}).mount('#app')
 
-const vm = (globalThis.vm = new Proxy(
-  { ...jsonData },
-  {
-    get() {
-      return Reflect.get(...arguments);
-    },
-    set(target, prop, newValue) {
-      switch (prop) {
-        case 'headline':
-          {
-            const h1 = app.querySelector('h1');
-            const imgClone = h1.querySelector('img').cloneNode();
-            h1.textContent = '\n' + newValue;
-            h1.prepend(imgClone);
-          }
-          break;
-        case 'description':
-          app.querySelector('p').textContent = newValue;
-          break;
-        case 'count':
-          app.querySelector('button').textContent = newValue;
-      }
-
-      Reflect.set(...arguments);
-      return true;
-    },
-  }
-));
-
-const app = document.getElementById('app');
-
-app.innerHTML = /* html */ `
-  <h1>
-    <img src="${vm.logos.js.src}" height="${vm.logos.js.size}" alt="${vm.logos.js.label}" />
-    ${vm.headline}
-  </h1>
-  <p>${vm.description}</p>
-  <button type="button" class="button">${vm.count}</button>
-`;
-
-app.addEventListener('click', ({ target }) => {
-  if (target.matches('button')) {
-    vm.count++;
-  }
-});
+app.on('button', 'click', ($data) => {
+  $data.count++
+  $data.headline += '⭐️'
+})
