@@ -1,21 +1,19 @@
-import './styles/globals.css';
-import jsonData from './data.json';
+import './styles/globals.css'
+import data from './data.json'
 
-const vueApp = Vue.createApp({
-  data() {
-    return { ...jsonData };
-  },
+const app = Vue.createApp({
+  data: () => ({ ...data }),
   computed: {
     convertHeadline() {
-      return this.headline.replace(/javascript/i, 'ue');
+      return this.headline.replace(/javascript/i, 'ue')
     },
     convertDescription() {
-      return this.description.replace(/javascript/i, 'Vue');
+      return this.description.replace(/javascript/i, 'Vue')
     },
   },
   methods: {
     increaseCount() {
-      this.count++;
+      this.count++
     },
   },
   template: /* html */ `
@@ -24,8 +22,9 @@ const vueApp = Vue.createApp({
         :src="logos.vue.src"
         :alt="logos.vue.label" 
         :height="logos.vue.size" 
-      />{{convertHeadline}}
-	  </h1>
+      />
+      {{convertHeadline}}
+    </h1>
 	  <p>{{convertDescription}}</p>
 	  <button
       type="button"
@@ -35,6 +34,6 @@ const vueApp = Vue.createApp({
       {{count}}
     </button>
   `,
-});
+}).mount('#app')
 
-globalThis.vm = vueApp.mount('#app');
+globalThis.vm = app

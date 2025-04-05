@@ -4,12 +4,12 @@
   "count": 0,
   "logos": {
     "js": {
-      "src": "https://cdn.worldvectorlogo.com/logos/logo-javascript.svg",
+      "src": "https://yamoo9.github.io/assets/logos/ecmascript.svg",
       "label": "JavaScript 로고",
       "size": 32
     },
     "vue": {
-      "src": "https://cdn.worldvectorlogo.com/logos/vue-9.svg",
+      "src": "https://yamoo9.github.io/assets/logos/vue.svg",
       "label": "Vue.js 로고",
       "size": 32
     }
